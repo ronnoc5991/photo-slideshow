@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <title>Photo-Carousel</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        position: absolute;
+        all: unset;
+        border: 2px solid black;
+        box-shadow: 0px 0px 10px 3px #888888;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+    }
+
+    #left-button {
+        transform: translateX(-550px);
+    }
+
+    #right-button {
+        transform: translateX(550px);
+    }
+
+    #location-display {
+        position: absolute;
+        transform: translateY(300px);
+        height: 50px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .location-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #E8E8E8;
+        margin: auto 10px;
+    }
+
+    .location-circle:hover {
+        transform: scale(1.1);
+    }
+
+    #large-container {
+        margin: auto;
+        width: 950px;
+        height: 450px;
+        background-color: transparent;
+        display: flex;
+        border: 25px solid black;
+        box-shadow: 0px 0px 10px 5px #888888;
+        overflow: hidden;
+        position: absolute;
+    }
+
+    #small-container {
+        margin: auto;
+        height: 100%;
+        background-color: white;
+        display: flex;
+        position: absolute;
+        transition: transform 300ms;
+    }
+
+    .image-container {
+        display: flex;
+        width: 950px;
+    }
+
+    img {
+        margin: auto;
+    }
+
+</style>
+<body>
+    <button type="button" id="left-button"><i class="fas fa-chevron-circle-left fa-3x"></i></button>
+    <div id="large-container">
+        <div id="small-container">
+           <!-- photos are appended here -->
+        </div>
+    </div>
+    <div id="location-display">
+        <!-- locaiton circles will be appended here -->
+    </div>
+    <button type="button" id="right-button"><i class="fas fa-chevron-circle-right fa-3x"></i></button>
+
+    <script src="main.js"></script>
+</body>
+</html>
