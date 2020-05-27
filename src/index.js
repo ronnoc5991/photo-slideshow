@@ -7,6 +7,15 @@ var numberOfPhotos = 0;
 const photoWidth = 950;
 var currentPhotoIndex = 0;
 
+function slideshow () {
+    if (currentPhotoIndex >= numberOfPhotos -1) {
+        currentPhotoIndex = 0;
+        changePhoto(getTranslateValue(currentPhotoIndex));
+    } else {
+        nextPhoto();
+    }
+}
+
 locationDisplay.addEventListener('click', function(event) {
     for (i=0; i<locationDisplay.children.length; ++i) {
         locationDisplay.children[i].id = '';
@@ -77,7 +86,4 @@ createNewPhoto();
 createNewPhoto();
 createNewPhoto();
 
-setInterval(nextPhoto, 5000);
-
-//make function that loops around on the slideshow... call this function in setInterval
-//function should change current Photo to index 0 when slideshow reaches the end
+setInterval(slideshow, 5000);
