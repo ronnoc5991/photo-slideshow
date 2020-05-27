@@ -3,24 +3,52 @@ const leftButton = document.getElementById('left-button');
 const rightButton = document.getElementById('right-button');
 const locationDisplay = document.getElementById('location-display');
 
-leftButton.addEventListener('click', slideLeft);
-rightButton.addEventListener('click', slideRight);
-
 var numberOfPhotos = 0;
 const photoWidth = 950;
-var clickCount = 0;
+var currentPhotoIndex = 0;
 
-function slideLeft () {
-    if (clickCount > 0) {
-        clickCount -= 1;
-        pictureFrame.style.transform = `translateX(-${photoWidth * clickCount}px)`;
+locationDisplay.addEventListener('click', function(event) {
+    for (i=0; i<locationDisplay.children.length; ++i) {
+        locationDisplay.children[i].id = '';
+    }
+    currentPhotoIndex = `${event.target.dataset.index}`;
+    event.target.id = 'location-circle-selected';
+    setActiveLocation(event.target.dataset.index);
+    changePhoto(getTranslateValue(currentPhotoIndex));
+});
+
+leftButton.addEventListener('click', previousPhoto);
+rightButton.addEventListener('click', nextPhoto);
+
+function setActiveLocation () {
+    for (i=0; i<locationDisplay.children.length; ++i) {
+        locationDisplay.children[i].id = '';
+    }
+    locationDisplay.children[currentPhotoIndex].id = 'location-circle-selected';
+}
+
+
+function changePhoto (translateValue) {
+    pictureFrame.style.transform = `translateX(${translateValue}px)`;
+}
+
+function getTranslateValue (index) {
+    var translateValue = -1 * (index * photoWidth);
+    setActiveLocation(index);
+    return translateValue;
+}
+
+function previousPhoto () {
+    if (currentPhotoIndex > 0) {
+        currentPhotoIndex--;
+        changePhoto(getTranslateValue(currentPhotoIndex));
     }
 }
 
-function slideRight () {
-    if (clickCount < numberOfPhotos-1) {
-        clickCount += 1;
-        pictureFrame.style.transform = `translateX(-${photoWidth * clickCount}px)`;
+function nextPhoto () {
+    if (currentPhotoIndex < numberOfPhotos-1) {
+        currentPhotoIndex++;
+        changePhoto(getTranslateValue(currentPhotoIndex));
     }
 }
 
@@ -37,6 +65,7 @@ function createNewPhoto (imageSource = 'https://source.unsplash.com/random/950x4
     locationDisplay.appendChild(locationCircle);
     locationCircle.dataset.index = `${numberOfPhotos}`;
     numberOfPhotos += 1;
+    locationDisplay.children[0].id = 'location-circle-selected';
 }
 
 createNewPhoto();
@@ -44,6 +73,11 @@ createNewPhoto();
 createNewPhoto();
 createNewPhoto();
 createNewPhoto();
+createNewPhoto();
+createNewPhoto();
+createNewPhoto();
 
-// current photo and location circles need to be linked.. both have indexes attached in dataset... current photo's corresponding location circle should display hover effects
-//should be a function called "determineTranslateValue" that uses the index number of the selected/current photo and multiplies by photowidth to get translate position;
+setInterval(nextPhoto, 5000);
+
+//make function that loops around on the slideshow... call this function in setInterval
+//function should change current Photo to index 0 when slideshow reaches the end

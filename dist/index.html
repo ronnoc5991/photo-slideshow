@@ -20,12 +20,13 @@
     button {
         position: absolute;
         all: unset;
-        border: 2px solid black;
-        box-shadow: 0px 0px 10px 3px #888888;
+        border: 2px solid #E8E8E8;
+        box-shadow: 0px 0px 5px 1px #888888;
         border-radius: 50%;
         height: 50px;
         width: 50px;
         text-align: center;
+        color: #E8E8E8;
     }
 
     #left-button {
@@ -45,15 +46,22 @@
     }
 
     .location-circle {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
-        background-color: #E8E8E8;
+        border: 2px solid #E8E8E8;
         margin: auto 10px;
+        box-shadow: 0px 0px 5px 1px #888888;
     }
 
     .location-circle:hover {
         transform: scale(1.1);
+        background-color: #E8E8E8;
+    }
+
+    #location-circle-selected {
+        transform: scale(1.1);
+        background-color: #E8E8E8;
     }
 
     #large-container {
@@ -62,7 +70,7 @@
         height: 450px;
         background-color: transparent;
         display: flex;
-        border: 25px solid black;
+        border: 25px solid #E8E8E8;
         box-shadow: 0px 0px 10px 5px #888888;
         overflow: hidden;
         position: absolute;
@@ -74,7 +82,7 @@
         background-color: white;
         display: flex;
         position: absolute;
-        transition: transform 300ms;
+        transition: transform 500ms;
     }
 
     .image-container {
